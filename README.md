@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Tasty - Food Delivery App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicație web de food delivery construită cu React, Tailwind CSS și Firebase.
 
-## Available Scripts
+## Funcționalități principale
 
-In the project directory, you can run:
+- Landing page cu secțiuni navigabile (`Home`, `Menu`, `About Us`, `Service`)
+- Filtrare produse pe categorii
+- Adăugare produse în coș (persistență în `localStorage`)
+- Autentificare Google (Firebase Auth)
+- Panou admin pentru creare produse (`/createItem`)
+- Stocare date în Firestore + upload imagini în Firebase Storage
 
-### `npm start`
+## Stack tehnic
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React 18
+- React Router DOM 6
+- Tailwind CSS
+- Framer Motion
+- Firebase v9 (Auth, Firestore, Storage)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Rulare locală
 
-### `npm test`
+### 1) Instalare dependențe
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `npm run build`
+### 2) Start proiect
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Aplicația va porni pe `http://localhost:3000`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3) Build producție
 
-### `npm run eject`
+```bash
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Structură proiect
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```text
+src/
+	components/       # UI components (header, home, menu, cart, create item)
+	context/          # state global (reducer + provider)
+	utils/            # date statice + funcții Firebase
+	firebase.config.js
+public/
+	index.html        # metadata SEO
+	manifest.json     # PWA metadata
+	robots.txt
+	sitemap.xml
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Configurare Firebase
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Configurația Firebase este în `src/firebase.config.js`.
 
-## Learn More
+Pentru producție, recomandat:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- mută cheile în variabile de mediu (`.env`)
+- folosește reguli stricte în Firestore/Storage
+- restricționează accesul admin la nivel de backend/rules
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## SEO implementat
 
-### Code Splitting
+Au fost adăugate îmbunătățiri SEO de bază:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `title` + `meta description` relevante
+- Open Graph (`og:*`) pentru share pe social
+- Twitter card tags
+- `robots` + `canonical`
+- JSON-LD (`WebSite` schema)
+- `robots.txt` cu referință la `sitemap.xml`
 
-### Analyzing the Bundle Size
+## Scripturi disponibile
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `npm start` - rulează aplicația în development
+- `npm run build` - creează build de producție
+- `npm test` - rulează testele
 
-### Making a Progressive Web App
+## Posibile îmbunătățiri viitoare
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Migrare de la CRA la Vite pentru performanță mai bună
+- Generare dinamică sitemap pe domeniul final (URL-uri absolute)
+- Pagină dedicată pentru fiecare produs (SEO mai bun)
+- `react-helmet-async` pentru meta per pagină/rută
+- Lighthouse audit (Performance, SEO, Accessibility, Best Practices)
