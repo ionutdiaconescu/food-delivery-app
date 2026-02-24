@@ -15,18 +15,18 @@ const App = () => {
   const [, dispatch] = useStateValue();
   const { hash, pathname } = useLocation();
 
-  const fetchData = async () => {
-    await getAllFoodItems().then((data) => {
-      dispatch({
-        type: actionType.SET_FOOD_ITEMS,
-        foodItems: data,
-      });
-    });
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      await getAllFoodItems().then((data) => {
+        dispatch({
+          type: actionType.SET_FOOD_ITEMS,
+          foodItems: data,
+        });
+      });
+    };
+
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (!hash) {

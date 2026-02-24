@@ -31,7 +31,7 @@ const CreateContainer = () => {
   const [alertStatus, setAlertStatus] = useState("danger");
   const [msg, setMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [{ foodItems }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   const uploadImage = (e) => {
     setIsLoading(true);
@@ -41,10 +41,7 @@ const CreateContainer = () => {
 
     uploadTask.on(
       "state_changed",
-      (snapshot) => {
-        const uploadProgress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      },
+      () => {},
       (error) => {
         console.log(error);
         setFields(true);
@@ -221,7 +218,7 @@ const CreateContainer = () => {
                   <div className="relative h-full">
                     <img
                       src={imageAsset}
-                      alt="uploaded image"
+                      alt="uploaded"
                       className="w-full h-full object-cover"
                     />
                     <button
